@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # Copyright 2019 Google LLC
 #
 # This software is licensed under the Open Software License version
