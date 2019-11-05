@@ -10,7 +10,7 @@ _variables:
 versions:
   # Magento 2 with PHP 7.2-fpm on Debian 9
   - dir: '2/2.3'
-    repo: 'magento-php7-fpm'
+    repo: 'magento2-php7-fpm'
     tags:
     - '2.3.2-debian9'
     - '2.3.2'
