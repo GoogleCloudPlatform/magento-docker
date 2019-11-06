@@ -42,6 +42,7 @@ RUN apt-get update \
     apt-utils \
     cron \
     gettext-base \
+    jq \
     libbz2-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
@@ -68,6 +69,7 @@ RUN apt-get update \
     pwgen \
     sudo \
     supervisor \
+    unzip \
     zip \
   && rm -rf /var/lib/apt/lists/*
 
