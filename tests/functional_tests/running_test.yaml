@@ -5,7 +5,7 @@
 # or in the file LICENSE which is distributed along with the software.
 
 setup:
-# - command: [docker, network, create, -d, bridge, testbridge-$UNIQUE-id]
+- command: [docker, network, create, -d, bridge, testbridge-$UNIQUE-id]
 - command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-redis-$UNIQUE-id, -d, -p, '6379:6379', gcr.io/cloud-marketplace-ops/redis5, '--requirepass', somepassword]
 - command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-mysql-$UNIQUE-id, -d, -p, '3306:3306', -e, 'MYSQL_ROOT_PASSWORD=root', -e, 'MYSQL_DATABASE=magento', -e, 'MYSQL_USER=magento', -e, 'MYSQL_PASSWORD=magento', launcher.gcr.io/google/mysql5]
 - command: [sleep, 5s]
