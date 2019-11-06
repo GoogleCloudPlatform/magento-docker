@@ -1,0 +1,46 @@
+# Copyright 2019 Google LLC
+#
+# This software is licensed under the Open Software License version
+# 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
+# or in the file LICENSE which is distributed along with the software.
+
+setup:
+- command: [docker, network, create, -d, bridge, testbridge-$UNIQUE-id]
+- command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-redis-$UNIQUE-id, -d, -p, '6379:6379', gcr.io/cloud-marketplace-ops/redis5, '--requirepass', somepassword]
+- command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-mysql-$UNIQUE-id, -d, -p, '3306:3306', -e, 'MYSQL_ROOT_PASSWORD=root', -e, 'MYSQL_DATABASE=magento', -e, 'MYSQL_USER=magento', -e, 'MYSQL_PASSWORD=magento', launcher.gcr.io/google/mysql5]
+- command: [sleep, 5s]
+- command: [docker, run, --net, testbridge-$UNIQUE-id, --name, some-magento-$UNIQUE-id, -d, -p, '80:80', -e, 'MAGENTO_MYSQL_HOST=some-mysql-$UNIQUE-id', -e, 'MAGENTO_REDIS_HOST=some-redis-$UNIQUE-id', -e, 'MAGENTO_REDIS_PASSWORD=somepassword', -e, 'MAGENTO_MYSQL_USERNAME=magento', -e, 'MAGENTO_MYSQL_PASSWORD=magento', '$IMAGE']
+- command: [sleep, 270s]
+
+teardown:
+- command: [docker, stop, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id]
+- command: [docker, rm, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id]
+- command: [docker, network, rm, testbridge-$UNIQUE-id]
+
+target: some-magento-$UNIQUE-id
+tests:
+- name: Test Magento Homepage
+  command: [curl, -L, 'http://some-magento-$UNIQUE-id']
+  expect:
+    stdout:
+      matches: 'CMS homepage content goes here.'
+- name: Test Magento MySQL and Redis connectivity
+  command: [curl, -I, 'http://some-magento-$UNIQUE-id/health_check.php']
+  expect:
+    stdout:
+      matches: 'HTTP/1.1 200 OK'
+- name: Test Product Search Page
+  command: [curl, -L, 'http://some-magento-$UNIQUE-id/search/term/popular/']
+  expect:
+    stdout:
+      matches: 'There are no search terms available.'
+- name: Check PHP-FPM is Running
+  command: [ps, aux]
+  expect:
+    stdout:
+      matches: 'php-fpm: master'
+- name: Check if MySQL Client is installed
+  command: [mysql, --version]
+  expect:
+    stdout:
+      matches: mysql

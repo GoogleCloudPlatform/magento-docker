@@ -1,5 +1,4 @@
 # magento-docker
-============
 
 Magento is an extensible and modular e-commerce platform. It provides several features out of the box, such as CMS, payment methods, layout control and a flexible pricing system.
 
