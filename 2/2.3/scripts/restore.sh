@@ -28,7 +28,7 @@ bin/magento setup:rollback \
     --db-file "${DB_FILE}" \
     --no-interaction
 
-# If backup has been completed with success, test it
+# If backup has not been completed with success, fail script
 if [[ "$?" -ne 0 ]]; then
     echo >&2 "Magento data restore has been failed."
     exit 1

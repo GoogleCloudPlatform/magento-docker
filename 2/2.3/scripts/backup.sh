@@ -12,11 +12,11 @@ set -e
 bin/magento config:set system/backup/functionality_enabled 1 --quiet
 
 # Backup data, code and files.
-BKP_OUTPUT=$(bin/magento setup:backup --code --db --media  2>&1)
+BKP_OUTPUT="$(bin/magento setup:backup --code --db --media  2>&1)"
 
 # Gets the backup pathes from Magento CLI Output
 # Filters only numbers, get the one which appears in first row
-BACKUP_ID=$(echo ${BKP_OUTPUT} | grep -o -E "([0-9]*)" | nl | awk '{if ($1 == "1") print $2}')
+BACKUP_ID="$(echo ${BKP_OUTPUT} | grep -o -E "([0-9]*)" | nl | awk '{if ($1 == "1") print $2}')"
 
 # Outputs to the end user
 if [[ ! -z "${BACKUP_ID}" ]]; then
