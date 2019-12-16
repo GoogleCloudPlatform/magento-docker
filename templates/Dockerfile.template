@@ -31,7 +31,7 @@ ENV MAGENTO_REDIS_PORT 6379
 ENV SODIUM_SHA1 {{ $sodium.Sha1 }}
 ENV SODIUM_VERSION {{ $sodium.Version }}
 
-ENV COMPOSER_SHA1 {{ $composer.Sha1 }}
+ENV COMPOSER_SHA256 {{ $composer.Gpg }}
 ENV COMPOSER_VERSION {{ $composer.Version }}
 
 ENV NGINX_VERSION {{ $nginx.Version }}
@@ -192,14 +192,11 @@ RUN chmod +x /docker-entrypoint.sh \
     && chmod +x /usr/local/bin/*.sh
 
 # Install Composer (PHP package manager)
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php -r "if (hash_file('sha1', 'composer-setup.php') === '${COMPOSER_SHA1}') { \
-                  echo 'Installer verified'; \
-                } else { \
-                  echo 'Installer corrupt'; unlink('composer-setup.php'); \
-                } echo PHP_EOL;" \
-    && php -d memory_limit=${PHP_MEMORY_LIMIT} composer-setup.php --install-dir=/usr/local/bin --version=${COMPOSER_VERSION} \
-    && rm composer-setup.php
+RUN set -e \
+    && cd /usr/local/bin \
+    && curl -o composer.phar "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar" \
+    && echo "${COMPOSER_SHA256} composer.phar" | sha256sum -c - \
+    && chmod +x composer.phar
 
 VOLUME /app
 

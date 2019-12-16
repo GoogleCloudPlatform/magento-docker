@@ -26,8 +26,8 @@ versions:
         version: '1.0.18'
         sha1: 9ff53da20d9051ab80fea78251b7564efd766a74
       composer:
-        version: '1.9.0'
-        sha1: 1be3e5a086739ea5fd8ea85d7702540ddc0e8e2c
+        version: '1.9.1'
+        gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
       nginx:
         version: '1.10.3'
 
