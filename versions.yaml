@@ -12,16 +12,16 @@ versions:
   - dir: '2/2.3'
     repo: 'magento2-php7-fpm'
     tags:
-    - '2.3.2-debian9'
-    - '2.3.2'
+    - '2.3.3-debian9'
+    - '2.3.3'
     - '2.3'
     - '2'
     - 'latest'
     from: *from9
     packages:
       magento:
-        version: '2.3.2'
-        sha1: 'a76775da8c602cdafa915355154149dc731dfd76'
+        version: '2.3.3'
+        sha1: '22e6a038f10e321e2bb88d1d985f90e3286c678a'
       sodium:
         version: '1.0.18'
         sha1: 9ff53da20d9051ab80fea78251b7564efd766a74
