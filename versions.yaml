@@ -1,36 +1,34 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # This software is licensed under the Open Software License version
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-_variables:
-  from9: &from9 'gcr.io/cloud-marketplace-ops/php7-fpm:7.2-debian9'
 
-versions:
-  # Magento 2 with PHP 7.2-fpm on Debian 9
-  - dir: '2/2.3'
-    repo: 'magento2-php7-fpm'
-    tags:
-    - '2.3.2-debian9'
-    - '2.3.2'
-    - '2.3'
-    - '2'
-    - 'latest'
-    from: *from9
-    packages:
-      magento:
-        version: '2.3.2'
-        sha1: 'a76775da8c602cdafa915355154149dc731dfd76'
-      sodium:
-        version: '1.0.18'
-        sha1: 9ff53da20d9051ab80fea78251b7564efd766a74
-      composer:
-        version: '1.9.1'
-        gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
-      nginx:
-        version: '1.10.3'
-
-# Enable parallel build.
 cloudbuild:
-  enable_parallel: true
+  enable_parallel: false
+versions:
+- dir: 2/debian9/2.3
+  from: gcr.io/cloud-marketplace-ops/php7-fpm:7.2-debian9
+  packages:
+    composer:
+      gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
+      version: 1.9.1
+    magento:
+      sha1: 7e54c054c22e8b095a95a4b50e68836fd7cb144d
+      version: 2.3.4
+    nginx:
+      version: 1.10.3
+    sodium:
+      sha1: 9ff53da20d9051ab80fea78251b7564efd766a74
+      version: 1.0.18
+  repo: magento2-php7-fpm
+  tags:
+  - 2.3.4-debian9
+  - 2.3-debian9
+  - 2-debian9
+  - 2.3.4
+  - '2.3'
+  - '2'
+  - latest
+
