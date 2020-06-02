@@ -71,9 +71,6 @@ function install_magento() {
         DEBUG_MAGENTO="true"
     fi
 
-    echo "Installing PHP Composer dependencies..." >&2
-    composer.phar install
-
     # Important: If you use Redis for more than one type of caching,
     # It is recommended that you assign them in different databases as follows:
     # - default caching database number to 0,

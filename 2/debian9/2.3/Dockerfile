@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # This software is licensed under the Open Software License version
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
@@ -202,7 +202,8 @@ WORKDIR /magento
 RUN curl -L -o magento.tar.gz https://api.github.com/repos/magento/magento2/tarball/${MAGENTO_VERSION} \
    && test "$(sha1sum magento.tar.gz | awk {'print $1'})" = ${MAGENTO_SHA1} \
    && tar -xf magento.tar.gz -C /magento --strip-components=1 \
-   && rm -f magento.tar.gz
+   && rm -f magento.tar.gz \
+   && composer.phar install
 
 WORKDIR /app
 
