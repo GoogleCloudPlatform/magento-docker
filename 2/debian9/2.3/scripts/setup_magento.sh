@@ -66,7 +66,6 @@ install_magento
 # Create first administrator user
 create_admin_user
 
-
 # 3. Preparing the production access ->
 
 # Prepare Magento Database Indexes, cache cleaning and web wizard setup app
