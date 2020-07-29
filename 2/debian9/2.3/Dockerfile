@@ -42,6 +42,7 @@ RUN apt-get update \
     apt-utils \
     cron \
     gettext-base \
+    git \
     jq \
     libbz2-dev \
     libjpeg62-turbo-dev \
@@ -64,7 +65,7 @@ RUN apt-get update \
     libyaml-dev \
     libzip-dev \
     mysql-client \
-    nginx=${NGINX_VERSION}-1+deb9u3 \
+    nginx=${NGINX_VERSION}* \
     procps \
     pwgen \
     sudo \
