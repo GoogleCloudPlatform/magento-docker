@@ -42,6 +42,7 @@ RUN apt-get update \
     apt-utils \
     cron \
     gettext-base \
+    git \
     jq \
     libbz2-dev \
     libjpeg62-turbo-dev \
