@@ -4,7 +4,7 @@
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.2-debian9
+FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.3-debian9
 
 ENV DEBUG_DOCKER_ENTRYPOINT false
 
