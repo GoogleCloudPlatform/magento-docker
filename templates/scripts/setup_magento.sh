@@ -18,9 +18,13 @@ REQUIRED_FIELDS=( \
     "MAGENTO_MYSQL_HOST" \
     "MAGENTO_REDIS_HOST" \
     "MAGENTO_REDIS_PORT" \
+    "MAGENTO_REDIS_PASSWORD" \
     "MAGENTO_MYSQL_USERNAME" \
     "MAGENTO_MYSQL_PASSWORD" \
-    "MAGENTO_REDIS_PASSWORD" \
+    "MAGENTO_ELASTISEARCH_HOST" \
+    "MAGENTO_ELASTISEARCH_PORT" \
+    "MAGENTO_ELASTISEARCH_USERNAME" \
+    "MAGENTO_ELASTISEARCH_PASSWORD" \
     "MAGENTO_ADMIN_EMAIL" \
     "ENABLE_CRONJOBS"
 )
@@ -49,8 +53,8 @@ if [[ -z "${MAGENTO_ADMIN_PASSWORD:-}" ]]; then
     echo "Password: ${MAGENTO_ADMIN_PASSWORD}"
 fi
 
-# Await Redis and MySQL. Once both are up, the setup continues.
-await_for_mysql_and_redis
+# Await Redis, MySQL and Elasticsearch. Once both are up, the setup continues.
+await_for_dependencies
 
 # 2. Installing Magento ->
 

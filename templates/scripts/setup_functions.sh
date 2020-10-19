@@ -29,14 +29,17 @@ function await_for_host_and_port() {
     fi
 }
 
-# Responsible for awaiting the dependencies be ready
-# MySQL and Redis should be available so the setup can start.
-function await_for_mysql_and_redis() {
+# Responsible for awaiting the dependencies to be ready
+# MySQL, Redis and Elasticsearch should be available so the setup can start.
+function await_for_dependencies() {
     echo "Awaiting MySQL to be ready..." >&2
     await_for_host_and_port "${MAGENTO_MYSQL_HOST}" "3306"
 
     echo "Awaiting Redis to be ready..." >&2
     await_for_host_and_port "${MAGENTO_REDIS_HOST}" "${MAGENTO_REDIS_PORT}"
+
+    echo "Awaiting Elasticsearch to be ready..." >&2
+    await_for_host_and_port "${MAGENTO_ELASTICSEARCH_HOST}" "${MAGENTO_ELASTICSEARCH_PORT}"
 }
 
 # Responsible for copying an entire folder to a destination
@@ -76,7 +79,7 @@ function install_magento() {
     # - default caching database number to 0,
     # - page caching database number to 1,
     # - session storage database number to 2
-    # https://devdocs.magento.com/guides/v2.3/config-guide/redis/redis-session.html
+    # https://devdocs.magento.com/guides/v2.4/config-guide/redis/redis-session.html
 
     # Prepare configuration
     bin/magento setup:config:set \
@@ -86,6 +89,12 @@ function install_magento() {
         --db-name "${MAGENTO_MYSQL_DB}" \
         --db-user "${MAGENTO_MYSQL_USERNAME}" \
         --db-password "${MAGENTO_MYSQL_PASSWORD}" \
+        --elasticsearch-host "${MAGENTO_ELASTISEARCH_HOST}" \
+        --elasticsearch-port "${MAGENTO_ELASTISEARCH_PORT}" \
+        --elasticsearch-enable-auth 1 \
+        --elasticsearch-username "${MAGENTO_ELASTISEARCH_USERNAME}" \
+        --elasticsearch-password "${MAGENTO_ELASTISEARCH_PASSWORD}" \
+        --elasticsearch-index-prefix magento
         --db-engine mysql \
         --session-save redis \
         --session-save-redis-host "${MAGENTO_REDIS_HOST}" \
