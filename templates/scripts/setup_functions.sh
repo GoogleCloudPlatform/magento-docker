@@ -89,12 +89,6 @@ function install_magento() {
         --db-name "${MAGENTO_MYSQL_DB}" \
         --db-user "${MAGENTO_MYSQL_USERNAME}" \
         --db-password "${MAGENTO_MYSQL_PASSWORD}" \
-        --elasticsearch-host "${MAGENTO_ELASTISEARCH_HOST}" \
-        --elasticsearch-port "${MAGENTO_ELASTISEARCH_PORT}" \
-        --elasticsearch-enable-auth 1 \
-        --elasticsearch-username "${MAGENTO_ELASTISEARCH_USERNAME}" \
-        --elasticsearch-password "${MAGENTO_ELASTISEARCH_PASSWORD}" \
-        --elasticsearch-index-prefix magento
         --db-engine mysql \
         --session-save redis \
         --session-save-redis-host "${MAGENTO_REDIS_HOST}" \
@@ -115,7 +109,12 @@ function install_magento() {
         --no-interaction
 
     # Install components
-    bin/magento setup:install && bin/magento setup:upgrade
+    bin/magento setup:install \
+        --search-engine elasticsearch7 \
+        --elasticsearch-host "${MAGENTO_ELASTICSEARCH_HOST}" \
+        --elasticsearch-port "${MAGENTO_ELASTICSEARCH_PORT}" \
+        --elasticsearch-index-prefix magento
+    bin/magento setup:upgrade
 
     # Compile static assets
     bin/magento setup:static-content:deploy -f
