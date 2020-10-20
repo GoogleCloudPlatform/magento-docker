@@ -4,7 +4,7 @@
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.2-debian9
+FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.3-debian9
 
 ENV DEBUG_DOCKER_ENTRYPOINT false
 
@@ -13,9 +13,9 @@ ENV MAGENTO_HOSTNAME localhost
 ENV MAGENTO_RUN_MODE production
 ENV ENABLE_CRONJOBS true
 
-ENV MAGENTO_SHA1 4342c4d9c7f9b551a3eb2fe775374dc15380948e
-ENV MAGENTO_VERSION 2.3.5
-ENV C2D_RELEASE 2.3.5
+ENV MAGENTO_SHA1 d97b8077e7d78c7ec22ef6e2a4f32c60cc8b4c18
+ENV MAGENTO_VERSION 2.4.0
+ENV C2D_RELEASE 2.4.0
 
 ENV MAGENTO_MYSQL_DB magento
 ENV MAGENTO_MYSQL_HOST localhost

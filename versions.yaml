@@ -8,15 +8,15 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 2/debian9/2.3
-  from: gcr.io/cloud-marketplace-ops/php7-fpm:7.2-debian9
+- dir: 2/debian9/2.4
+  from: gcr.io/cloud-marketplace-ops/php7-fpm:7.3-debian9
   packages:
     composer:
       gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
       version: 1.9.1
     magento:
-      sha1: 4342c4d9c7f9b551a3eb2fe775374dc15380948e
-      version: 2.3.5
+      sha1: d97b8077e7d78c7ec22ef6e2a4f32c60cc8b4c18
+      version: 2.4.0
     nginx:
       version: 1.10.3
     sodium:
@@ -24,11 +24,10 @@ versions:
       version: 1.0.18
   repo: magento2-php7-fpm
   tags:
-  - 2.3.5-debian9
-  - 2.3-debian9
+  - 2.4.0-debian9
+  - 2.4-debian9
   - 2-debian9
-  - 2.3.5
-  - '2.3'
+  - 2.4.0
+  - '2.4'
   - '2'
   - latest
-
