@@ -15,8 +15,8 @@ versions:
       gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
       version: 1.9.1
     magento:
-      sha1: d97b8077e7d78c7ec22ef6e2a4f32c60cc8b4c18
-      version: 2.4.0
+      sha1: 108e26c58816db327d4ff4ee75614207e88ed3b5
+      version: 2.4.1
     nginx:
       version: 1.10.3
     sodium:
@@ -24,10 +24,10 @@ versions:
       version: 1.0.18
   repo: magento2-php7-fpm
   tags:
-  - 2.4.0-debian9
+  - 2.4.1-debian9
   - 2.4-debian9
   - 2-debian9
-  - 2.4.0
+  - 2.4.1
   - '2.4'
   - '2'
   - latest
