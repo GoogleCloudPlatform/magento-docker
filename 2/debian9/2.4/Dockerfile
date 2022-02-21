@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # This software is licensed under the Open Software License version
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
@@ -13,7 +13,7 @@ ENV MAGENTO_HOSTNAME localhost
 ENV MAGENTO_RUN_MODE production
 ENV ENABLE_CRONJOBS true
 
-ENV MAGENTO_SHA1 1b8294d8879b9a6a92c7d6f854d74d52a591f195
+ENV MAGENTO_SHA256 23314c7495507db06d0d599369b3cc06e41b2ed9f3ba3736758bc33370801a5e
 ENV MAGENTO_VERSION 2.4.3
 ENV C2D_RELEASE 2.4.3
 
@@ -24,7 +24,7 @@ ENV MAGENTO_MYSQL_PORT 3306
 ENV MAGENTO_REDIS_HOST localhost
 ENV MAGENTO_REDIS_PORT 6379
 
-ENV SODIUM_SHA1 9ff53da20d9051ab80fea78251b7564efd766a74
+ENV SODIUM_SHA256 b7292dd1da67a049c8e78415cd498ec138d194cfdb302e716b08d26b80fecc10
 ENV SODIUM_VERSION 1.0.18
 
 ENV COMPOSER_SHA256 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
@@ -201,7 +201,7 @@ WORKDIR /magento
 
 # Download and install Magento libraries via Composer
 RUN curl -L -o magento.tar.gz https://api.github.com/repos/magento/magento2/tarball/${MAGENTO_VERSION} \
-   && test "$(sha1sum magento.tar.gz | awk {'print $1'})" = ${MAGENTO_SHA1} \
+   && test "$(Sha256sum magento.tar.gz | awk {'print $1'})" = ${MAGENTO_SHA256} \
    && tar -xf magento.tar.gz -C /magento --strip-components=1 \
    && rm -f magento.tar.gz \
    && composer.phar install
