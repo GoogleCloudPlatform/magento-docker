@@ -201,7 +201,7 @@ WORKDIR /magento
 
 # Download and install Magento libraries via Composer
 RUN curl -L -o magento.tar.gz https://api.github.com/repos/magento/magento2/tarball/${MAGENTO_VERSION} \
-   && test "$(Sha256sum magento.tar.gz | awk {'print $1'})" = ${MAGENTO_SHA256} \
+   && test "$(sha256sum magento.tar.gz | awk {'print $1'})" = ${MAGENTO_SHA256} \
    && tar -xf magento.tar.gz -C /magento --strip-components=1 \
    && rm -f magento.tar.gz \
    && composer.phar install
