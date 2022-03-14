@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # This software is licensed under the Open Software License version
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
@@ -15,12 +15,12 @@ versions:
       gpg: 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
       version: 1.9.1
     magento:
-      sha256: 23314c7495507db06d0d599369b3cc06e41b2ed9f3ba3736758bc33370801a5e
+      sha1: 1b8294d8879b9a6a92c7d6f854d74d52a591f195
       version: 2.4.3
     nginx:
       version: 1.10.3
     sodium:
-      sha256: b7292dd1da67a049c8e78415cd498ec138d194cfdb302e716b08d26b80fecc10
+      sha1: 9ff53da20d9051ab80fea78251b7564efd766a74
       version: 1.0.18
   repo: magento2-php7-fpm
   tags:
