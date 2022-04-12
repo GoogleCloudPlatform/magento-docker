@@ -4,7 +4,7 @@
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.3-debian9
+FROM marketplace.gcr.io/google/php7-fpm:7.4
 
 ENV DEBUG_DOCKER_ENTRYPOINT false
 
@@ -30,7 +30,7 @@ ENV SODIUM_VERSION 1.0.18
 ENV COMPOSER_SHA256 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
 ENV COMPOSER_VERSION 1.9.1
 
-ENV NGINX_VERSION 1.10.3
+ENV NGINX_VERSION 1.18.0
 
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_UPLOAD_SIZE 64M
@@ -64,7 +64,7 @@ RUN apt-get update \
     libxslt1-dev \
     libyaml-dev \
     libzip-dev \
-    mysql-client \
+    mariadb-client \
     nginx=${NGINX_VERSION}* \
     procps \
     pwgen \
@@ -74,10 +74,9 @@ RUN apt-get update \
     zip \
   && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-configure opcache --enable-opcache \
-    && docker-php-ext-configure zip --with-libzip
+    && docker-php-ext-configure opcache --enable-opcache
 
 RUN docker-php-ext-install -j$(nproc) \
   bcmath \
@@ -94,7 +93,6 @@ RUN docker-php-ext-install -j$(nproc) \
   opcache \
   pdo_mysql \
   pspell \
-  recode \
   shmop \
   soap \
   sockets \
@@ -156,7 +154,6 @@ RUN docker-php-ext-enable \
   propro \
   pspell \
   raphf \
-  recode \
   redis \
   shmop \
   soap \
