@@ -1,6 +1,0 @@
-docker network create -d bridge testbridge-$UNIQUE-id
-docker run --net testbridge-$UNIQUE-id --name some-redis-$UNIQUE-id -d -p '6379:6379' marketplace.gcr.io/google/redis5 '--requirepass' somepassword
-docker run --net testbridge-$UNIQUE-id --name some-mysql-$UNIQUE-id -d -p '3306:3306' -e 'MYSQL_ROOT_PASSWORD=root' -e 'MYSQL_DATABASE=magento' -e 'MYSQL_USER=magento' -e'MYSQL_PASSWORD=magento' marketplace.gcr.io/google/mysql5
-docker run --net testbridge-$UNIQUE-id --name some-es-$UNIQUE-id -d -p '9200:9200' -e 'discovery.type=single-node' -e '-e "ES_JAVA_OPTS=-Xms1g -Xmx1g"' marketplace.gcr.io/google/elasticsearch7
-
-docker run --net testbridge-$UNIQUE-id --name some-magento-$UNIQUE-id -d -p '80:80' -e 'MAGENTO_MYSQL_HOST=some-mysql-$UNIQUE-id' -e 'MAGENTO_REDIS_HOST=some-redis-$UNIQUE-id' -e 'MAGENTO_REDIS_PASSWORD=somepassword' -e 'MAGENTO_MYSQL_USERNAME=magento' -e 'MAGENTO_MYSQL_PASSWORD=magento' -e 'MAGENTO_ELASTICSEARCH_HOST=some-es-$UNIQUE-id' -e
