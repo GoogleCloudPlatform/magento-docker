@@ -49,6 +49,7 @@ RUN apt-get update \
     libpng-dev \
     libfreetype6-dev \
     libgeoip-dev \
+    python \
     wget \
     libgmp-dev \
     libmagickwand-dev \
