@@ -14,8 +14,8 @@ setup:
 - command: [sleep, 270s]
 
 teardown:
-- command: [docker, stop, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id]
-- command: [docker, rm, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id]
+- command: [docker, stop, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id, some-es-$UNIQUE-id]
+- command: [docker, rm, some-redis-$UNIQUE-id, some-mysql-$UNIQUE-id, some-magento-$UNIQUE-id, some-es-$UNIQUE-id]
 - command: [docker, network, rm, testbridge-$UNIQUE-id]
 
 target: some-magento-$UNIQUE-id
