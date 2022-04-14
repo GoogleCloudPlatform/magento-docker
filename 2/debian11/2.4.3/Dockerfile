@@ -110,10 +110,10 @@ RUN pecl install -o -f \
   geoip-1.1.1 \
   igbinary \
   imagick \
+  propro \
   mailparse \
   msgpack \
   oauth \
-  propro \
   raphf \
   redis \
   yaml
@@ -141,8 +141,6 @@ RUN docker-php-ext-enable \
   gd \
   gettext \
   gmp \
-  igbinary \
-  imagick \
   imap \
   intl \
   ldap \
@@ -152,7 +150,6 @@ RUN docker-php-ext-enable \
   oauth \
   opcache \
   pdo_mysql \
-  propro \
   pspell \
   raphf \
   redis \
@@ -165,6 +162,9 @@ RUN docker-php-ext-enable \
   sysvshm \
   tidy \
   xmlrpc \
+  igbinary \
+  imagick \
+  propro \
   xsl \
   yaml \
   zip \

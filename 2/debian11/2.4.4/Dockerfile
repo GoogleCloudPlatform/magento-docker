@@ -1,16 +1,10 @@
-{{- $magento := index .Packages "magento" -}}
-{{- $sodium := index .Packages "sodium" -}}
-{{- $composer := index .Packages "composer" -}}
-{{- $nginx := index .Packages "nginx" -}}
-{{- $php := index .Packages "php" -}}
-
 # Copyright 2022 Google LLC
 #
 # This software is licensed under the Open Software License version
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-FROM {{ .From }}
+FROM marketplace.gcr.io/google/php8-fpm:8.1
 
 ENV DEBUG_DOCKER_ENTRYPOINT false
 
@@ -19,9 +13,9 @@ ENV MAGENTO_HOSTNAME localhost
 ENV MAGENTO_RUN_MODE production
 ENV ENABLE_CRONJOBS true
 
-ENV MAGENTO_SHA256 {{ $magento.Sha256 }}
-ENV MAGENTO_VERSION {{ $magento.Version }}
-ENV C2D_RELEASE {{ $magento.Version }}
+ENV MAGENTO_SHA256 ef4c4d5cdf60cbc5d6a1d6f68770054d85127e4fbdb38ef16ad8997eb2573941
+ENV MAGENTO_VERSION 2.4.4
+ENV C2D_RELEASE 2.4.4
 
 ENV MAGENTO_MYSQL_DB magento
 ENV MAGENTO_MYSQL_HOST localhost
@@ -30,13 +24,13 @@ ENV MAGENTO_MYSQL_PORT 3306
 ENV MAGENTO_REDIS_HOST localhost
 ENV MAGENTO_REDIS_PORT 6379
 
-ENV SODIUM_SHA256 {{ $sodium.Sha256 }}
-ENV SODIUM_VERSION {{ $sodium.Version }}
+ENV SODIUM_SHA256 b7292dd1da67a049c8e78415cd498ec138d194cfdb302e716b08d26b80fecc10
+ENV SODIUM_VERSION 1.0.18
 
-ENV COMPOSER_SHA256 {{ $composer.Gpg }}
-ENV COMPOSER_VERSION {{ $composer.Version }}
+ENV COMPOSER_SHA256 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
+ENV COMPOSER_VERSION 1.9.1
 
-ENV NGINX_VERSION {{ $nginx.Version }}
+ENV NGINX_VERSION 1.18.0
 
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_UPLOAD_SIZE 64M
@@ -107,22 +101,12 @@ RUN docker-php-ext-install -j$(nproc) \
   sysvsem \
   sysvshm \
   tidy \
-  {{- if eq $php.Version "7.4" }}
-  xmlrpc \
-  {{- end }}
   xsl \
   zip \
   pcntl
 
 RUN pecl install -o -f \
-  {{- if eq $php.Version "7.4" }}
-  geoip-1.1.1 \
-  igbinary \
-  imagick \
-  propro \
-  {{- else }}
   xmlrpc-1.0.0RC3 \
-  {{- end }}
   mailparse \
   msgpack \
   oauth \
@@ -135,8 +119,8 @@ RUN rm -f /usr/local/etc/php/conf.d/*sodium.ini \
   && rm -f /usr/local/lib/php/extensions/*/*sodium.so \
   && apt-get remove libsodium* -y  \
   && mkdir -p /tmp/libsodium  \
-  && curl -sL https://github.com/jedisct1/libsodium/archive/{{ $sodium.Version }}-RELEASE.tar.gz | tar xzf - -C  /tmp/libsodium \
-  && cd /tmp/libsodium/libsodium-{{ $sodium.Version }}-RELEASE/ \
+  && curl -sL https://github.com/jedisct1/libsodium/archive/1.0.18-RELEASE.tar.gz | tar xzf - -C  /tmp/libsodium \
+  && cd /tmp/libsodium/libsodium-1.0.18-RELEASE/ \
   && ./configure \
   && make && make check \
   && make install  \
@@ -173,12 +157,6 @@ RUN docker-php-ext-enable \
   sysvsem \
   sysvshm \
   tidy \
-  {{- if eq $php.Version "7.4" }}
-  xmlrpc \
-  igbinary \
-  imagick \
-  propro \
-  {{- end }}
   xsl \
   yaml \
   zip \
