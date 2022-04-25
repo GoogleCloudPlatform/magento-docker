@@ -4,7 +4,7 @@
 # 3.0. The full text of this license can be found in https://opensource.org/licenses/OSL-3.0
 # or in the file LICENSE which is distributed along with the software.
 
-FROM marketplace.gcr.io/google/php7-fpm:7.4
+FROM gcr.io/cloud-marketplace-ops/php7-fpm:7.3-debian9
 
 ENV DEBUG_DOCKER_ENTRYPOINT false
 
@@ -13,9 +13,9 @@ ENV MAGENTO_HOSTNAME localhost
 ENV MAGENTO_RUN_MODE production
 ENV ENABLE_CRONJOBS true
 
-ENV MAGENTO_SHA256 23314c7495507db06d0d599369b3cc06e41b2ed9f3ba3736758bc33370801a5e
-ENV MAGENTO_VERSION 2.4.3
-ENV C2D_RELEASE 2.4.3
+ENV MAGENTO_SHA256 ef4c4d5cdf60cbc5d6a1d6f68770054d85127e4fbdb38ef16ad8997eb2573941
+ENV MAGENTO_VERSION 2.4.4
+ENV C2D_RELEASE 2.4.4
 
 ENV MAGENTO_MYSQL_DB magento
 ENV MAGENTO_MYSQL_HOST localhost
@@ -30,7 +30,7 @@ ENV SODIUM_VERSION 1.0.18
 ENV COMPOSER_SHA256 1f210b9037fcf82670d75892dfc44400f13fe9ada7af9e787f93e50e3b764111
 ENV COMPOSER_VERSION 1.9.1
 
-ENV NGINX_VERSION 1.18.0
+ENV NGINX_VERSION 1.10.3
 
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_UPLOAD_SIZE 64M
@@ -101,16 +101,12 @@ RUN docker-php-ext-install -j$(nproc) \
   sysvsem \
   sysvshm \
   tidy \
-  xmlrpc \
   xsl \
   zip \
   pcntl
 
 RUN pecl install -o -f \
-  geoip-1.1.1 \
-  igbinary \
-  imagick \
-  propro \
+  xmlrpc-1.0.0RC3 \
   mailparse \
   msgpack \
   oauth \
@@ -161,10 +157,6 @@ RUN docker-php-ext-enable \
   sysvsem \
   sysvshm \
   tidy \
-  xmlrpc \
-  igbinary \
-  imagick \
-  propro \
   xsl \
   yaml \
   zip \
