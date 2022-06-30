@@ -13,9 +13,9 @@ ENV MAGENTO_HOSTNAME localhost
 ENV MAGENTO_RUN_MODE production
 ENV ENABLE_CRONJOBS true
 
-ENV MAGENTO_SHA256 23314c7495507db06d0d599369b3cc06e41b2ed9f3ba3736758bc33370801a5e
-ENV MAGENTO_VERSION 2.4.3
-ENV C2D_RELEASE 2.4.3
+ENV MAGENTO_SHA256 ef4c4d5cdf60cbc5d6a1d6f68770054d85127e4fbdb38ef16ad8997eb2573941
+ENV MAGENTO_VERSION 2.4.4
+ENV C2D_RELEASE 2.4.4
 
 ENV MAGENTO_MYSQL_DB magento
 ENV MAGENTO_MYSQL_HOST localhost
@@ -101,16 +101,12 @@ RUN docker-php-ext-install -j$(nproc) \
   sysvsem \
   sysvshm \
   tidy \
-  xmlrpc \
   xsl \
   zip \
   pcntl
 
 RUN pecl install -o -f \
-  geoip-1.1.1 \
-  igbinary \
-  imagick \
-  propro \
+  xmlrpc-1.0.0RC3 \
   mailparse \
   msgpack \
   oauth \
@@ -161,10 +157,6 @@ RUN docker-php-ext-enable \
   sysvsem \
   sysvshm \
   tidy \
-  xmlrpc \
-  igbinary \
-  imagick \
-  propro \
   xsl \
   yaml \
   zip \
